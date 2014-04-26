@@ -14,12 +14,14 @@
 (defn get-all-notes []
   (response {:notes (select notes)}))
 
-(defn create-note []
-  (response "create some note"))
+(defn create-note [note]
+  (insert notes
+    (values note))
+  (response note))
 
 (defroutes api-routes
   (GET "/notes" [] (get-all-notes))
-  (POST "/notes" [] (create-note)))
+  (POST "/notes" [note] (create-note note)))
 
 (defroutes main-routes
   (GET "/" [] "Hello World")
